@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 
 const repositoryMatch = process.env.GITHUB_REPOSITORY?.trim().match(
-  /^([^/]+)\/([^/]+)$/
+  /^[^/]+\/([^/]+)$/
 );
 const repoName = repositoryMatch?.[2];
 
