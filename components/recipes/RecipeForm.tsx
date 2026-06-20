@@ -313,8 +313,10 @@ export function RecipeForm({
           onChange={(e) => setIsVatRated(e.target.checked)}
           className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
         />
-        VAT rated (sale price includes 20% UK VAT)
-        <Tooltip text="Tick this if the product is standard-rated for UK VAT. The calculator will strip VAT from the sale price before computing your margin." />
+        <span className="inline-flex items-center gap-1.5">
+          VAT rated (sale price includes 20% UK VAT)
+          <Tooltip text="Tick this if the product is standard-rated for UK VAT. The calculator will strip VAT from the sale price before computing your margin." />
+        </span>
       </label>
 
       <div>
