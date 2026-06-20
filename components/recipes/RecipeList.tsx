@@ -29,7 +29,7 @@ export function RecipeList({
       const notes = recipe.notes?.toLowerCase() ?? '';
       const tagMatch =
         recipe.tags?.some((tag) =>
-          normalizedSearch.includes(tag.toLowerCase()),
+          tag.toLowerCase().includes(normalizedSearch),
         ) ?? false;
       return (
         recipe.name.toLowerCase().includes(normalizedSearch) ||

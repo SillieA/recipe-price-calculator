@@ -27,7 +27,7 @@ export function IngredientList({
       const notes = ingredient.notes?.toLowerCase() ?? '';
       const tagMatch =
         ingredient.tags?.some((tag) =>
-          normalizedSearch.includes(tag.toLowerCase()),
+          tag.toLowerCase().includes(normalizedSearch),
         ) ?? false;
       return (
         ingredient.name.toLowerCase().includes(normalizedSearch) ||
