@@ -42,7 +42,7 @@ body {
 
 button:not(:disabled),
 select,
-a,
+a[href],
 [role="button"] {
   cursor: pointer;
 }
