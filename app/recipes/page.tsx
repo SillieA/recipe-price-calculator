@@ -24,7 +24,7 @@ export default function RecipesPage() {
     setModalOpen(true);
   };
 
-  const handleSubmit = (values: Omit<Recipe, 'id'>) => {
+  const handleSubmit = (values: Omit<Recipe, 'id' | 'updatedAt'>) => {
     if (editing) {
       updateRecipe(editing.id, values);
     } else {

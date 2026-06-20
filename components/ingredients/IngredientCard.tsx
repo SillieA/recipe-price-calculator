@@ -16,6 +16,10 @@ export function IngredientCard({
 }: IngredientCardProps) {
   const unit = getUnit(ingredient.unitId);
   const unitShort = unit?.label.split(' ')[0] ?? ingredient.unitId;
+  const updatedAt = new Date(ingredient.updatedAt);
+  const updatedLabel = Number.isNaN(updatedAt.getTime())
+    ? 'Unknown'
+    : updatedAt.toLocaleString();
 
   return (
     <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col gap-3">
@@ -41,6 +45,7 @@ export function IngredientCard({
       {ingredient.notes && (
         <p className="text-sm text-slate-500">{ingredient.notes}</p>
       )}
+      <p className="text-xs text-slate-500">Last updated: {updatedLabel}</p>
 
       <div className="flex gap-2 pt-1 border-t border-slate-100">
         <button

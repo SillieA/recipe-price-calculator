@@ -15,6 +15,7 @@ export interface Ingredient {
   price: number; // price in currency
   quantity: number; // amount (e.g. 500)
   unitId: string; // unit (e.g. 'g', 'oz', 'ml')
+  updatedAt: string;
   notes?: string;
 }
 
@@ -32,6 +33,7 @@ export interface Recipe {
   yieldUnit: string; // e.g. "loaves", "cookies", "muffins"
   salePrice: number; // sale price per unit produced
   isVatRated: boolean; // whether the product is VAT rated (20%)
+  updatedAt: string;
   notes?: string;
 }
 
