@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Ingredient, UNITS, UnitType } from '@/types';
 import { TagInput } from '@/components/TagInput';
+import { Tooltip } from '@/components/Tooltip';
 
 interface IngredientFormProps {
   initial?: Ingredient;
@@ -75,7 +76,10 @@ export function IngredientForm({
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">
-          Ingredient name
+          <span className="inline-flex items-center gap-1.5">
+            Ingredient name
+            <Tooltip text="The name of the ingredient as it appears in your library and in recipe ingredient lists." />
+          </span>
         </label>
         <input
           type="text"
@@ -90,7 +94,10 @@ export function IngredientForm({
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
-            Price (£)
+            <span className="inline-flex items-center gap-1.5">
+              Price (£)
+              <Tooltip text="The total price you paid for the package. E.g. £1.50 for a 1 kg bag of flour." />
+            </span>
           </label>
           <input
             type="number"
@@ -104,7 +111,10 @@ export function IngredientForm({
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
-            Amount
+            <span className="inline-flex items-center gap-1.5">
+              Amount
+              <Tooltip text="The total amount the package contains, in the unit you select below. E.g. 1000 g for a 1 kg bag." />
+            </span>
           </label>
           <input
             type="number"
@@ -118,7 +128,10 @@ export function IngredientForm({
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
-            Unit
+            <span className="inline-flex items-center gap-1.5">
+              Unit
+              <Tooltip text="The unit of measurement for this ingredient. Recipes can use any compatible unit (e.g. g and kg are both weight)." />
+            </span>
           </label>
           <select
             value={unitId}
@@ -145,7 +158,10 @@ export function IngredientForm({
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">
-          Notes (optional)
+          <span className="inline-flex items-center gap-1.5">
+            Notes (optional)
+            <Tooltip text="Any extra information about this ingredient, such as the brand, supplier, or storage notes." />
+          </span>
         </label>
         <textarea
           value={notes}
@@ -157,7 +173,10 @@ export function IngredientForm({
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">
-          Tags (optional)
+          <span className="inline-flex items-center gap-1.5">
+            Tags (optional)
+            <Tooltip text="Labels to organise ingredients. Tags are searchable — type a tag name in the search box on the Ingredients page to filter by it." />
+          </span>
         </label>
         <TagInput tags={tags} onChange={setTags} suggestions={existingTags} />
         <p className="mt-1 text-xs text-slate-500">
