@@ -9,6 +9,7 @@ import {
   getUnit,
 } from '@/types';
 import { TagInput } from '@/components/TagInput';
+import { Tooltip } from '@/components/Tooltip';
 
 interface RecipeFormProps {
   initial?: Recipe;
@@ -149,7 +150,10 @@ export function RecipeForm({
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">
-          Recipe name
+          <span className="inline-flex items-center gap-1.5">
+            Recipe name
+            <Tooltip text="A descriptive name for this recipe, e.g. 'Sourdough loaf' or 'Chocolate cupcakes'." />
+          </span>
         </label>
         <input
           type="text"
@@ -164,7 +168,10 @@ export function RecipeForm({
       <div>
         <div className="flex items-center justify-between mb-2">
           <label className="block text-sm font-medium text-slate-700">
-            Ingredients
+            <span className="inline-flex items-center gap-1.5">
+              Ingredients
+              <Tooltip text="The ingredients used in this recipe and the quantities needed. Costs update automatically whenever an ingredient's price is changed." />
+            </span>
           </label>
           <button
             type="button"
@@ -251,7 +258,10 @@ export function RecipeForm({
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
-            Yields (qty)
+            <span className="inline-flex items-center gap-1.5">
+              Yields (qty)
+              <Tooltip text="How many individual units this recipe produces in one batch, e.g. 12 for a dozen cupcakes or 1 for a single loaf." />
+            </span>
           </label>
           <input
             type="number"
@@ -264,7 +274,10 @@ export function RecipeForm({
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
-            Yield unit
+            <span className="inline-flex items-center gap-1.5">
+              Yield unit
+              <Tooltip text="What each unit produced is called, e.g. 'loaves', 'cookies', or 'jars'. Used for display purposes only." />
+            </span>
           </label>
           <input
             type="text"
@@ -276,7 +289,10 @@ export function RecipeForm({
         </div>
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">
-            Sale price each (£)
+            <span className="inline-flex items-center gap-1.5">
+              Sale price each (£)
+              <Tooltip text="The price you sell each unit for. The calculator uses this to work out your profit margin per batch." />
+            </span>
           </label>
           <input
             type="number"
@@ -298,11 +314,15 @@ export function RecipeForm({
           className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
         />
         VAT rated (sale price includes 20% UK VAT)
+        <Tooltip text="Tick this if the product is standard-rated for UK VAT. The calculator will strip VAT from the sale price before computing your margin." />
       </label>
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">
-          Notes (optional)
+          <span className="inline-flex items-center gap-1.5">
+            Notes (optional)
+            <Tooltip text="Any extra details about this recipe, such as preparation tips, serving suggestions, or storage instructions." />
+          </span>
         </label>
         <textarea
           value={notes}
@@ -314,7 +334,10 @@ export function RecipeForm({
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">
-          Tags (optional)
+          <span className="inline-flex items-center gap-1.5">
+            Tags (optional)
+            <Tooltip text="Labels to organise recipes. Tags are searchable — type a tag name in the search box on the Recipes page to filter by it." />
+          </span>
         </label>
         <TagInput tags={tags} onChange={setTags} suggestions={existingTags} />
         <p className="mt-1 text-xs text-slate-500">

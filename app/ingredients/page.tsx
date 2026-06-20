@@ -31,7 +31,6 @@ export default function IngredientsPage() {
     setEditing(ingredient);
     setModalOpen(true);
   };
-
   const handleSubmit = (values: Omit<Ingredient, 'id' | 'updatedAt'>) => {
     if (editing) {
       updateIngredient(editing.id, values);
@@ -51,6 +50,12 @@ export default function IngredientsPage() {
       deleteIngredient(ingredient.id);
     }
   };
+
+  const affectedRecipes = editing
+    ? data.recipes.filter((r) =>
+        r.ingredients.some((ri) => ri.ingredientId === editing.id),
+      )
+    : [];
 
   return (
     <div className="space-y-6">
@@ -88,6 +93,25 @@ export default function IngredientsPage() {
           setEditing(null);
         }}
       >
+        {editing && affectedRecipes.length > 0 && (
+          <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-800">
+            <p className="font-medium">
+              Updating this ingredient will affect{' '}
+              {affectedRecipes.length === 1
+                ? '1 recipe'
+                : `${affectedRecipes.length} recipes`}{' '}
+              that use it:
+            </p>
+            <ul className="mt-1.5 ml-4 list-disc space-y-0.5">
+              {affectedRecipes.map((r) => (
+                <li key={r.id}>{r.name}</li>
+              ))}
+            </ul>
+            <p className="mt-2 text-amber-700">
+              Costs for those recipes will update automatically.
+            </p>
+          </div>
+        )}
         <IngredientForm
           initial={editing ?? undefined}
           existingTags={allTags}

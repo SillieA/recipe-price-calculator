@@ -8,6 +8,7 @@ const links = [
   { href: '/', label: 'Dashboard' },
   { href: '/ingredients', label: 'Ingredients' },
   { href: '/recipes', label: 'Recipes' },
+  { href: '/how-to', label: 'How To' },
 ];
 
 export function Navigation() {
