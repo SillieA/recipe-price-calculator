@@ -1,21 +1,27 @@
 name: Auto-merge Dependabot PRs
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
+  pull_request_review:
+    types: [submitted]
 
 permissions:
   contents: write
   pull-requests: write
 
+env:
+  MERGE_METHOD: SQUASH
+
 jobs:
   auto-merge:
-    name: Auto-merge if Copilot review has no comments
+    name: Auto-merge if Copilot review is clean
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    if: |
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.event.review.user.login == 'copilot-pull-request-reviewer[bot]' &&
+      github.event.review.state == 'approved'
 
     steps:
-      - name: Wait for Copilot review
+      - name: Check for Copilot inline comments and enable auto-merge
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -23,38 +29,7 @@ jobs:
             const { owner, repo } = context.repo;
             const pull_number = context.payload.pull_request.number;
 
-            // Poll for a completed Copilot review (up to ~5 min)
-            const maxAttempts = 30;
-            const delayMs = 10000;
-
-            let copilotReview = null;
-            for (let attempt = 0; attempt < maxAttempts; attempt++) {
-              const { data: reviews } = await github.rest.pulls.listReviews({
-                owner, repo, pull_number,
-              });
-
-              copilotReview = reviews.find(
-                r => r.user?.login === 'copilot-pull-request-reviewer[bot]' &&
-                     (r.state === 'APPROVED' || r.state === 'CHANGES_REQUESTED' || r.state === 'COMMENTED')
-              );
-
-              if (copilotReview) break;
-              if (attempt < maxAttempts - 1) {
-                await new Promise(resolve => setTimeout(resolve, delayMs));
-              }
-            }
-
-            if (!copilotReview) {
-              core.notice('No Copilot review found — skipping auto-merge.');
-              return;
-            }
-
-            if (copilotReview.state !== 'APPROVED') {
-              core.notice(`Copilot review state is "${copilotReview.state}" — skipping auto-merge.`);
-              return;
-            }
-
-            // Check for inline review comments
+            // Check for inline review comments from Copilot
             const { data: reviewComments } = await github.rest.pulls.listReviewComments({
               owner, repo, pull_number,
             });
@@ -68,9 +43,25 @@ jobs:
               return;
             }
 
-            // Enable auto-merge (squash)
-            await github.rest.pulls.merge({
-              owner, repo, pull_number,
-              merge_method: 'squash',
-            });
-            core.notice('Dependabot PR auto-merged.');
+            // Resolve the PR's GraphQL node ID
+            const prData = await github.graphql(`
+              query GetPRId($owner: String!, $repo: String!, $number: Int!) {
+                repository(owner: $owner, name: $repo) {
+                  pullRequest(number: $number) { id }
+                }
+              }
+            `, { owner, repo, number: pull_number });
+
+            const prId = prData.repository.pullRequest.id;
+
+            // Enable auto-merge — GitHub will merge once all required checks pass
+            const mergeMethod = process.env.MERGE_METHOD || 'SQUASH';
+            await github.graphql(`
+              mutation EnableAutoMerge($prId: ID!, $mergeMethod: PullRequestMergeMethod!) {
+                enablePullRequestAutoMerge(input: { pullRequestId: $prId, mergeMethod: $mergeMethod }) {
+                  pullRequest { autoMergeRequest { mergeMethod } }
+                }
+              }
+            `, { prId, mergeMethod });
+
+            core.notice('Auto-merge enabled — will merge once all required checks pass.');
