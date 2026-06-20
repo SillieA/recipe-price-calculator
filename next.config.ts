@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
-const repository = process.env.GITHUB_REPOSITORY;
+const repository = process.env.GITHUB_REPOSITORY?.trim().replace(/\/+$/, "");
+const repositoryParts = repository?.split("/");
 const repoName =
-  repository && repository.includes("/") ? repository.split("/")[1] : undefined;
+  repositoryParts?.length === 2 && repositoryParts[0] && repositoryParts[1]
+    ? repositoryParts[1]
+    : undefined;
 
 const nextConfig: NextConfig = {
   output: "export",
