@@ -25,9 +25,14 @@ export function IngredientList({
     const filtered = ingredients.filter((ingredient) => {
       if (!normalizedSearch) return true;
       const notes = ingredient.notes?.toLowerCase() ?? '';
+      const tagMatch =
+        ingredient.tags?.some((tag) =>
+          normalizedSearch.includes(tag.toLowerCase()),
+        ) ?? false;
       return (
         ingredient.name.toLowerCase().includes(normalizedSearch) ||
-        notes.includes(normalizedSearch)
+        notes.includes(normalizedSearch) ||
+        tagMatch
       );
     });
 

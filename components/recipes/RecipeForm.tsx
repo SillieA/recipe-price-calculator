@@ -8,10 +8,12 @@ import {
   UNITS,
   getUnit,
 } from '@/types';
+import { TagInput } from '@/components/TagInput';
 
 interface RecipeFormProps {
   initial?: Recipe;
   ingredients: Ingredient[];
+  existingTags?: string[];
   onSubmit: (values: Omit<Recipe, 'id' | 'updatedAt'>) => void;
   onCancel: () => void;
 }
@@ -32,6 +34,7 @@ const unitsForIngredient = (ingredient: Ingredient | undefined) => {
 export function RecipeForm({
   initial,
   ingredients,
+  existingTags = [],
   onSubmit,
   onCancel,
 }: RecipeFormProps) {
@@ -45,6 +48,7 @@ export function RecipeForm({
   );
   const [isVatRated, setIsVatRated] = useState(initial?.isVatRated ?? false);
   const [notes, setNotes] = useState(initial?.notes ?? '');
+  const [tags, setTags] = useState<string[]>(initial?.tags ?? []);
   const [lines, setLines] = useState<LineDraft[]>(
     initial?.ingredients.map((line) => ({
       ingredientId: line.ingredientId,
@@ -134,6 +138,7 @@ export function RecipeForm({
       salePrice: saleNum,
       isVatRated,
       notes: notes.trim() || undefined,
+      tags: tags.length > 0 ? tags : undefined,
     });
   };
 
@@ -305,6 +310,16 @@ export function RecipeForm({
           rows={2}
           className={inputClass}
         />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          Tags (optional)
+        </label>
+        <TagInput tags={tags} onChange={setTags} suggestions={existingTags} />
+        <p className="mt-1 text-xs text-slate-500">
+          Press Enter or comma to add a tag.
+        </p>
       </div>
 
       {error && <p className="text-sm text-red-600">{error}</p>}

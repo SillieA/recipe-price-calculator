@@ -2,9 +2,11 @@
 
 import { useState } from 'react';
 import { Ingredient, UNITS, UnitType } from '@/types';
+import { TagInput } from '@/components/TagInput';
 
 interface IngredientFormProps {
   initial?: Ingredient;
+  existingTags?: string[];
   onSubmit: (values: Omit<Ingredient, 'id' | 'updatedAt'>) => void;
   onCancel: () => void;
 }
@@ -25,6 +27,7 @@ const unitGroups = (['weight', 'volume', 'quantity'] as UnitType[]).map(
 
 export function IngredientForm({
   initial,
+  existingTags = [],
   onSubmit,
   onCancel,
 }: IngredientFormProps) {
@@ -37,6 +40,7 @@ export function IngredientForm({
   );
   const [unitId, setUnitId] = useState(initial?.unitId ?? 'g');
   const [notes, setNotes] = useState(initial?.notes ?? '');
+  const [tags, setTags] = useState<string[]>(initial?.tags ?? []);
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -63,6 +67,7 @@ export function IngredientForm({
       quantity: quantityNum,
       unitId,
       notes: notes.trim() || undefined,
+      tags: tags.length > 0 ? tags : undefined,
     });
   };
 
@@ -148,6 +153,16 @@ export function IngredientForm({
           rows={2}
           className="w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
         />
+      </div>
+
+      <div>
+        <label className="block text-sm font-medium text-slate-700 mb-1">
+          Tags (optional)
+        </label>
+        <TagInput tags={tags} onChange={setTags} suggestions={existingTags} />
+        <p className="mt-1 text-xs text-slate-500">
+          Press Enter or comma to add a tag.
+        </p>
       </div>
 
       {error && <p className="text-sm text-red-600">{error}</p>}

@@ -159,6 +159,20 @@ export function RecipeCard({
       {recipe.notes && (
         <p className="text-sm text-slate-500">{recipe.notes}</p>
       )}
+
+      {recipe.tags && recipe.tags.length > 0 && (
+        <div className="flex flex-wrap gap-1.5">
+          {recipe.tags.map((tag) => (
+            <span
+              key={tag}
+              className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+      )}
+
       <p className="text-xs text-slate-500">Last updated: {updatedLabel}</p>
 
       <div className="flex gap-2 pt-1 border-t border-slate-100">

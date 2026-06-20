@@ -18,6 +18,10 @@ export default function IngredientsPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Ingredient | null>(null);
 
+  const allTags = Array.from(
+    new Set(data.ingredients.flatMap((ing) => ing.tags ?? [])),
+  ).sort();
+
   const openAdd = () => {
     setEditing(null);
     setModalOpen(true);
@@ -86,6 +90,7 @@ export default function IngredientsPage() {
       >
         <IngredientForm
           initial={editing ?? undefined}
+          existingTags={allTags}
           onSubmit={handleSubmit}
           onCancel={() => {
             setModalOpen(false);

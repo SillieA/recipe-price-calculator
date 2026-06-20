@@ -27,9 +27,14 @@ export function RecipeList({
     const filtered = recipes.filter((recipe) => {
       if (!normalizedSearch) return true;
       const notes = recipe.notes?.toLowerCase() ?? '';
+      const tagMatch =
+        recipe.tags?.some((tag) =>
+          normalizedSearch.includes(tag.toLowerCase()),
+        ) ?? false;
       return (
         recipe.name.toLowerCase().includes(normalizedSearch) ||
-        notes.includes(normalizedSearch)
+        notes.includes(normalizedSearch) ||
+        tagMatch
       );
     });
     return filtered.sort((a, b) => {
