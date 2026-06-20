@@ -82,21 +82,21 @@ export function ExportImport() {
       <button
         type="button"
         onClick={handleExport}
-        className="px-3 py-2 rounded-md text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50"
+        className="px-3 py-2 rounded-md text-sm font-medium border border-brand-border text-slate-600 hover:bg-surface-subtle"
       >
         Export
       </button>
       <button
         type="button"
         onClick={handleImportClick}
-        className="px-3 py-2 rounded-md text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50"
+        className="px-3 py-2 rounded-md text-sm font-medium border border-brand-border text-slate-600 hover:bg-surface-subtle"
       >
         Import
       </button>
       <button
         type="button"
         onClick={handleShareUrl}
-        className="px-3 py-2 rounded-md text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50"
+        className="px-3 py-2 rounded-md text-sm font-medium border border-brand-border text-slate-600 hover:bg-surface-subtle"
       >
         Copy share URL
       </button>

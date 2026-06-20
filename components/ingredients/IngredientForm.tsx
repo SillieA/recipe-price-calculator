@@ -75,7 +75,7 @@ export function IngredientForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-slate-600 mb-1">
           <span className="inline-flex items-center gap-1.5">
             Ingredient name
             <Tooltip text="The name of the ingredient as it appears in your library and in recipe ingredient lists." />
@@ -86,14 +86,14 @@ export function IngredientForm({
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="e.g. Plain flour"
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+          className="w-full rounded-md border border-brand-border px-3 py-2 text-foreground focus:border-brand focus:ring-1 focus:ring-brand outline-none"
           autoFocus
         />
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-slate-600 mb-1">
             <span className="inline-flex items-center gap-1.5">
               Price (£)
               <Tooltip text="The total price you paid for the package. E.g. £1.50 for a 1 kg bag of flour." />
@@ -106,11 +106,11 @@ export function IngredientForm({
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="1.50"
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+            className="w-full rounded-md border border-brand-border px-3 py-2 text-foreground focus:border-brand focus:ring-1 focus:ring-brand outline-none"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-slate-600 mb-1">
             <span className="inline-flex items-center gap-1.5">
               Amount
               <Tooltip text="The total amount the package contains, in the unit you select below. E.g. 1000 g for a 1 kg bag." />
@@ -123,11 +123,11 @@ export function IngredientForm({
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
             placeholder="1000"
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+            className="w-full rounded-md border border-brand-border px-3 py-2 text-foreground focus:border-brand focus:ring-1 focus:ring-brand outline-none"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-slate-600 mb-1">
             <span className="inline-flex items-center gap-1.5">
               Unit
               <Tooltip text="The unit of measurement for this ingredient. Recipes can use any compatible unit (e.g. g and kg are both weight)." />
@@ -136,7 +136,7 @@ export function IngredientForm({
           <select
             value={unitId}
             onChange={(e) => setUnitId(e.target.value)}
-            className="w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+            className="w-full rounded-md border border-brand-border px-3 py-2 text-foreground bg-surface focus:border-brand focus:ring-1 focus:ring-brand outline-none"
           >
             {unitGroups.map((group) => (
               <optgroup key={group.type} label={group.label}>
@@ -157,7 +157,7 @@ export function IngredientForm({
       </p>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-slate-600 mb-1">
           <span className="inline-flex items-center gap-1.5">
             Notes (optional)
             <Tooltip text="Any extra information about this ingredient, such as the brand, supplier, or storage notes." />
@@ -167,12 +167,12 @@ export function IngredientForm({
           value={notes}
           onChange={(e) => setNotes(e.target.value)}
           rows={2}
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
+          className="w-full rounded-md border border-brand-border px-3 py-2 text-foreground focus:border-brand focus:ring-1 focus:ring-brand outline-none"
         />
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-slate-600 mb-1">
           <span className="inline-flex items-center gap-1.5">
             Tags (optional)
             <Tooltip text="Labels to organise ingredients. Tags are searchable — type a tag name in the search box on the Ingredients page to filter by it." />
@@ -190,13 +190,13 @@ export function IngredientForm({
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 rounded-md text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50"
+          className="px-4 py-2 rounded-md text-sm font-medium border border-brand-border text-slate-600 hover:bg-surface-subtle"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700"
+          className="px-4 py-2 rounded-md text-sm font-medium bg-brand text-white hover:bg-brand-hover"
         >
           {initial ? 'Save changes' : 'Add ingredient'}
         </button>

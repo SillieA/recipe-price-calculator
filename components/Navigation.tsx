@@ -18,14 +18,14 @@ export function Navigation() {
     href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-30">
+    <header className="bg-surface border-b border-brand-border sticky top-0 z-30">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex flex-wrap items-center justify-between gap-3 py-3">
           <div className="flex items-center gap-2">
             <span className="text-2xl" aria-hidden>
-              🧮
+              🎂
             </span>
-            <Link href="/" className="font-semibold text-lg text-slate-900">
+            <Link href="/" className="font-semibold text-lg text-foreground font-heading">
               Recipe Price Calculator
             </Link>
           </div>
@@ -37,8 +37,8 @@ export function Navigation() {
                 href={link.href}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   isActive(link.href)
-                    ? 'bg-indigo-600 text-white'
-                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                    ? 'bg-brand text-white'
+                    : 'text-slate-600 hover:bg-brand-light hover:text-brand-dark'
                 }`}
               >
                 {link.label}

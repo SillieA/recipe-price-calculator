@@ -51,7 +51,7 @@ export function IngredientList({
 
   if (ingredients.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-dashed border-slate-300 p-10 text-center">
+      <div className="bg-surface rounded-md border border-dashed border-brand-border p-10 text-center">
         <p className="text-slate-500">
           No ingredients yet. Add your first ingredient to get started.
         </p>
@@ -67,14 +67,14 @@ export function IngredientList({
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder="Search ingredients..."
-          className="w-full sm:flex-1 rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none bg-white"
+          className="w-full sm:flex-1 rounded-md border border-brand-border px-3 py-2 text-foreground focus:border-brand focus:ring-1 focus:ring-brand outline-none bg-surface"
         />
         <select
           value={sortBy}
           onChange={(event) =>
             setSortBy(event.target.value as typeof sortBy)
           }
-          className="w-full sm:w-60 rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none bg-white"
+          className="w-full sm:w-60 rounded-md border border-brand-border px-3 py-2 text-foreground focus:border-brand focus:ring-1 focus:ring-brand outline-none bg-surface"
         >
           <option value="name-asc">Name (A → Z)</option>
           <option value="name-desc">Name (Z → A)</option>
@@ -83,7 +83,7 @@ export function IngredientList({
         </select>
       </div>
       {filteredAndSorted.length === 0 ? (
-        <div className="bg-white rounded-xl border border-dashed border-slate-300 p-10 text-center">
+        <div className="bg-surface rounded-md border border-dashed border-brand-border p-10 text-center">
           <p className="text-slate-500">No ingredients match your search.</p>
         </div>
       ) : (

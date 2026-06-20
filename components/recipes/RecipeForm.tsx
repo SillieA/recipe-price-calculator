@@ -144,12 +144,12 @@ export function RecipeForm({
   };
 
   const inputClass =
-    'w-full rounded-md border border-slate-300 px-3 py-2 text-slate-900 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none';
+    'w-full rounded-md border border-brand-border px-3 py-2 text-foreground focus:border-brand focus:ring-1 focus:ring-brand outline-none';
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-slate-600 mb-1">
           <span className="inline-flex items-center gap-1.5">
             Recipe name
             <Tooltip text="A descriptive name for this recipe, e.g. 'Sourdough loaf' or 'Chocolate cupcakes'." />
@@ -167,7 +167,7 @@ export function RecipeForm({
 
       <div>
         <div className="flex items-center justify-between mb-2">
-          <label className="block text-sm font-medium text-slate-700">
+          <label className="block text-sm font-medium text-slate-600">
             <span className="inline-flex items-center gap-1.5">
               Ingredients
               <Tooltip text="The ingredients used in this recipe and the quantities needed. Costs update automatically whenever an ingredient's price is changed." />
@@ -177,18 +177,18 @@ export function RecipeForm({
             type="button"
             onClick={addLine}
             disabled={ingredients.length === 0}
-            className="text-sm font-medium text-indigo-600 hover:text-indigo-800 disabled:text-slate-300 disabled:cursor-not-allowed"
+            className="text-sm font-medium text-brand hover:text-brand-dark disabled:text-slate-300 disabled:cursor-not-allowed"
           >
             + Add ingredient
           </button>
         </div>
 
         {ingredients.length === 0 ? (
-          <p className="text-sm text-slate-500 bg-slate-50 border border-slate-200 rounded-md p-3">
+          <p className="text-sm text-slate-500 bg-surface-subtle border border-brand-border rounded-md p-3">
             Add ingredients to your library first, then include them here.
           </p>
         ) : lines.length === 0 ? (
-          <p className="text-sm text-slate-500 bg-slate-50 border border-slate-200 rounded-md p-3">
+          <p className="text-sm text-slate-500 bg-surface-subtle border border-brand-border rounded-md p-3">
             No ingredients added yet.
           </p>
         ) : (
@@ -208,7 +208,7 @@ export function RecipeForm({
                     onChange={(e) =>
                       updateLine(index, { ingredientId: e.target.value })
                     }
-                    className={`${inputClass} col-span-6 bg-white`}
+                    className={`${inputClass} col-span-6 bg-surface`}
                   >
                     {ingredients.map((ing) => (
                       <option key={ing.id} value={ing.id}>
@@ -232,7 +232,7 @@ export function RecipeForm({
                     onChange={(e) =>
                       updateLine(index, { unitId: e.target.value })
                     }
-                    className={`${inputClass} col-span-3 bg-white`}
+                    className={`${inputClass} col-span-3 bg-surface`}
                   >
                     {allowedUnits.map((unit) => (
                       <option key={unit.id} value={unit.id}>
@@ -257,7 +257,7 @@ export function RecipeForm({
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-slate-600 mb-1">
             <span className="inline-flex items-center gap-1.5">
               Yields (qty)
               <Tooltip text="How many individual units this recipe produces in one batch, e.g. 12 for a dozen cupcakes or 1 for a single loaf." />
@@ -273,7 +273,7 @@ export function RecipeForm({
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-slate-600 mb-1">
             <span className="inline-flex items-center gap-1.5">
               Yield unit
               <Tooltip text="What each unit produced is called, e.g. 'loaves', 'cookies', or 'jars'. Used for display purposes only." />
@@ -288,7 +288,7 @@ export function RecipeForm({
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">
+          <label className="block text-sm font-medium text-slate-600 mb-1">
             <span className="inline-flex items-center gap-1.5">
               Sale price each (£)
               <Tooltip text="The price you sell each unit for. The calculator uses this to work out your profit margin per batch." />
@@ -306,12 +306,12 @@ export function RecipeForm({
         </div>
       </div>
 
-      <label className="flex items-center gap-2 text-sm text-slate-700">
+      <label className="flex items-center gap-2 text-sm text-slate-600">
         <input
           type="checkbox"
           checked={isVatRated}
           onChange={(e) => setIsVatRated(e.target.checked)}
-          className="h-4 w-4 rounded border-slate-300 text-indigo-600 focus:ring-indigo-500"
+          className="h-4 w-4 rounded border-brand-border text-brand focus:ring-brand"
         />
         <span className="inline-flex items-center gap-1.5">
           VAT rated (sale price includes 20% UK VAT)
@@ -320,7 +320,7 @@ export function RecipeForm({
       </label>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-slate-600 mb-1">
           <span className="inline-flex items-center gap-1.5">
             Notes (optional)
             <Tooltip text="Any extra details about this recipe, such as preparation tips, serving suggestions, or storage instructions." />
@@ -335,7 +335,7 @@ export function RecipeForm({
       </div>
 
       <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">
+        <label className="block text-sm font-medium text-slate-600 mb-1">
           <span className="inline-flex items-center gap-1.5">
             Tags (optional)
             <Tooltip text="Labels to organise recipes. Tags are searchable — type a tag name in the search box on the Recipes page to filter by it." />
@@ -353,13 +353,13 @@ export function RecipeForm({
         <button
           type="button"
           onClick={onCancel}
-          className="px-4 py-2 rounded-md text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50"
+          className="px-4 py-2 rounded-md text-sm font-medium border border-brand-border text-slate-600 hover:bg-surface-subtle"
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700"
+          className="px-4 py-2 rounded-md text-sm font-medium bg-brand text-white hover:bg-brand-hover"
         >
           {initial ? 'Save changes' : 'Add recipe'}
         </button>

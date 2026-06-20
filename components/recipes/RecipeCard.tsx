@@ -29,7 +29,7 @@ export function RecipeCard({
     : updatedAt.toLocaleString();
 
   return (
-    <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-5 flex flex-col gap-4">
+    <div className="bg-surface rounded-md border border-brand-border shadow-sm p-5 flex flex-col gap-4">
       <div className="flex items-start justify-between gap-2">
         <div>
           <h3 className="font-semibold text-lg text-slate-900">
@@ -51,10 +51,10 @@ export function RecipeCard({
         </div>
       </div>
 
-      <div className="border border-slate-100 rounded-lg overflow-hidden">
+      <div className="border border-brand-border rounded-sm overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="bg-slate-50 text-slate-500 text-left">
+            <tr className="bg-surface-subtle text-slate-500 text-left">
               <th className="px-3 py-2 font-medium">Ingredient</th>
               <th className="px-3 py-2 font-medium text-right">Qty</th>
               <th className="px-3 py-2 font-medium text-right">Cost</th>
@@ -72,7 +72,7 @@ export function RecipeCard({
               </tr>
             )}
             {result.lineItems.map((item, index) => (
-              <tr key={index} className="border-t border-slate-100">
+              <tr key={index} className="border-t border-brand-border">
                 <td className="px-3 py-2 text-slate-700">
                   {item.ingredientName}
                   {item.error && (
@@ -144,7 +144,7 @@ export function RecipeCard({
       </dl>
 
       <div
-        className={`flex items-center justify-between rounded-lg px-4 py-3 ${
+        className={`flex items-center justify-between rounded-md px-4 py-3 ${
           profitable
             ? 'bg-emerald-50 text-emerald-700'
             : 'bg-red-50 text-red-700'
@@ -165,7 +165,7 @@ export function RecipeCard({
           {recipe.tags.map((tag) => (
             <span
               key={tag}
-              className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700"
+              className="inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-brand-light text-brand-dark"
             >
               {tag}
             </span>
@@ -175,11 +175,11 @@ export function RecipeCard({
 
       <p className="text-xs text-slate-500">Last updated: {updatedLabel}</p>
 
-      <div className="flex gap-2 pt-1 border-t border-slate-100">
+      <div className="flex gap-2 pt-1 border-t border-brand-border">
         <button
           type="button"
           onClick={() => onEdit(recipe)}
-          className="flex-1 text-sm font-medium text-indigo-600 hover:text-indigo-800 py-1"
+          className="flex-1 text-sm font-medium text-brand hover:text-brand-dark py-1"
         >
           Edit
         </button>
