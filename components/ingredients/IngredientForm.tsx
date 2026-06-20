@@ -5,7 +5,7 @@ import { Ingredient, UNITS, UnitType } from '@/types';
 
 interface IngredientFormProps {
   initial?: Ingredient;
-  onSubmit: (values: Omit<Ingredient, 'id'>) => void;
+  onSubmit: (values: Omit<Ingredient, 'id' | 'updatedAt'>) => void;
   onCancel: () => void;
 }
 

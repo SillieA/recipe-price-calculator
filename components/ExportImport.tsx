@@ -3,6 +3,7 @@
 import { useRef, useState } from 'react';
 import { AppData } from '@/types';
 import { useAppData } from '@/components/AppDataProvider';
+import { encodeShareData } from '@/lib/share';
 
 export function ExportImport() {
   const { data, importData } = useAppData();
@@ -26,6 +27,24 @@ export function ExportImport() {
 
   const handleImportClick = () => {
     fileInputRef.current?.click();
+  };
+
+  const handleShareUrl = async () => {
+    try {
+      const payload = await encodeShareData(data);
+      const url = new URL(window.location.href);
+      url.searchParams.set('share', payload);
+      await navigator.clipboard.writeText(url.toString());
+      setMessage('Share URL copied to clipboard.');
+    } catch (error) {
+      setMessage(
+        `Share URL failed: ${
+          error instanceof Error ? error.message : 'Unknown error'
+        }`,
+      );
+    } finally {
+      setTimeout(() => setMessage(null), 4000);
+    }
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,6 +92,13 @@ export function ExportImport() {
         className="px-3 py-2 rounded-md text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50"
       >
         Import
+      </button>
+      <button
+        type="button"
+        onClick={handleShareUrl}
+        className="px-3 py-2 rounded-md text-sm font-medium border border-slate-300 text-slate-700 hover:bg-slate-50"
+      >
+        Copy share URL
       </button>
       <input
         ref={fileInputRef}

@@ -28,7 +28,7 @@ export default function IngredientsPage() {
     setModalOpen(true);
   };
 
-  const handleSubmit = (values: Omit<Ingredient, 'id'>) => {
+  const handleSubmit = (values: Omit<Ingredient, 'id' | 'updatedAt'>) => {
     if (editing) {
       updateIngredient(editing.id, values);
     } else {

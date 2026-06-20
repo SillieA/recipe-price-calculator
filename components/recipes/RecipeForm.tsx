@@ -12,7 +12,7 @@ import {
 interface RecipeFormProps {
   initial?: Recipe;
   ingredients: Ingredient[];
-  onSubmit: (values: Omit<Recipe, 'id'>) => void;
+  onSubmit: (values: Omit<Recipe, 'id' | 'updatedAt'>) => void;
   onCancel: () => void;
 }
 
