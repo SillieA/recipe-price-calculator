@@ -16,13 +16,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="h-full antialiased">
-      <body className="min-h-full flex flex-col bg-slate-100 text-slate-900">
+      <body className="min-h-full flex flex-col bg-background text-foreground">
         <AppDataProvider>
           <Navigation />
           <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 py-8">
             {children}
           </main>
-          <footer className="border-t border-slate-200 bg-white">
+          <footer className="border-t border-brand-border bg-surface">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 text-sm text-slate-500">
               Recipe Price Calculator &mdash; data is stored locally in your
               browser.

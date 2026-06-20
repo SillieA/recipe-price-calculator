@@ -16,12 +16,12 @@ function Step({ number, title, children }: StepProps) {
   return (
     <div className="flex gap-5">
       <div className="flex-none">
-        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-indigo-600 text-white text-sm font-bold">
+        <div className="flex h-9 w-9 items-center justify-center rounded-full bg-brand text-white text-sm font-bold">
           {number}
         </div>
       </div>
-      <div className="pb-8 border-l border-slate-200 pl-5 -ml-[calc(1.125rem+1px)] flex-1">
-        <h2 className="text-lg font-semibold text-slate-900 mb-2">{title}</h2>
+      <div className="pb-8 border-l border-brand-border pl-5 -ml-[calc(1.125rem+1px)] flex-1">
+        <h2 className="text-lg font-semibold text-foreground font-heading mb-2">{title}</h2>
         <div className="text-slate-600 space-y-2 text-sm leading-relaxed">
           {children}
         </div>
@@ -32,7 +32,7 @@ function Step({ number, title, children }: StepProps) {
 
 function Note({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mt-3 rounded-md border border-indigo-100 bg-indigo-50 px-3 py-2 text-indigo-800 text-xs leading-relaxed">
+    <div className="mt-3 rounded-md border border-brand-border bg-brand-light px-3 py-2 text-brand-dark text-xs leading-relaxed">
       {children}
     </div>
   );
@@ -42,7 +42,7 @@ export default function HowToPage() {
   return (
     <div className="max-w-2xl mx-auto space-y-8">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">
+        <h1 className="text-2xl font-bold text-foreground font-heading">
           How to use the Recipe Price Calculator
         </h1>
         <p className="mt-2 text-slate-500">
@@ -51,7 +51,7 @@ export default function HowToPage() {
         </p>
       </div>
 
-      <div className="bg-white rounded-xl border border-slate-200 shadow-sm px-8 py-6">
+      <div className="bg-surface rounded-md border border-brand-border shadow-sm px-8 py-6">
         <Step number={1} title="Add your ingredients">
           <p>
             Go to the <strong>Ingredients</strong> page and click{' '}
@@ -143,11 +143,11 @@ export default function HowToPage() {
           <ul className="list-disc ml-5 space-y-1">
             <li>
               Type a tag name in the tag field, then press{' '}
-              <kbd className="rounded border border-slate-300 bg-slate-100 px-1 py-0.5 text-xs font-mono">
+              <kbd className="rounded border border-brand-border bg-surface-subtle px-1 py-0.5 text-xs font-mono">
                 Enter
               </kbd>{' '}
               or{' '}
-              <kbd className="rounded border border-slate-300 bg-slate-100 px-1 py-0.5 text-xs font-mono">
+              <kbd className="rounded border border-brand-border bg-surface-subtle px-1 py-0.5 text-xs font-mono">
                 ,
               </kbd>{' '}
               to add it.
@@ -158,7 +158,7 @@ export default function HowToPage() {
             </li>
             <li>
               Press{' '}
-              <kbd className="rounded border border-slate-300 bg-slate-100 px-1 py-0.5 text-xs font-mono">
+              <kbd className="rounded border border-brand-border bg-surface-subtle px-1 py-0.5 text-xs font-mono">
                 Backspace
               </kbd>{' '}
               when the field is empty to remove the last tag.

@@ -48,7 +48,7 @@ export default function RecipesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Recipes</h1>
+          <h1 className="text-2xl font-bold text-foreground font-heading">Recipes</h1>
           <p className="text-slate-500">
             Costs and profit margins based on your ingredient prices.
           </p>
@@ -56,14 +56,14 @@ export default function RecipesPage() {
         <button
           type="button"
           onClick={openAdd}
-          className="px-4 py-2 rounded-md text-sm font-medium bg-indigo-600 text-white hover:bg-indigo-700 whitespace-nowrap"
+          className="px-4 py-2 rounded-md text-sm font-medium bg-brand text-white hover:bg-brand-hover whitespace-nowrap"
         >
           + Add recipe
         </button>
       </div>
 
       {data.ingredients.length === 0 && hydrated && (
-        <div className="bg-amber-50 border border-amber-200 text-amber-800 rounded-lg px-4 py-3 text-sm">
+        <div className="bg-amber-50 border border-amber-200 text-amber-800 rounded-md px-4 py-3 text-sm">
           You have no ingredients yet. Add some on the{' '}
           <Link href="/ingredients" className="font-medium underline">
             Ingredients

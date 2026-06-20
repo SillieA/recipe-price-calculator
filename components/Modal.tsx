@@ -32,7 +32,7 @@ export function Modal({ open, title, onClose, children }: ModalProps) {
         onClick={onClose}
         aria-hidden
       />
-      <div className="relative z-10 w-full max-w-2xl my-8 bg-white rounded-xl shadow-xl">
+      <div className="relative z-10 w-full max-w-2xl my-8 bg-surface rounded-md shadow-xl">
         <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4">
           <h2 className="text-lg font-semibold text-slate-900">{title}</h2>
           <button
