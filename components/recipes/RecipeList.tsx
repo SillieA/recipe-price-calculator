@@ -22,16 +22,6 @@ export function RecipeList({
     'name-asc' | 'name-desc' | 'updated-asc' | 'updated-desc'
   >('name-asc');
 
-  if (recipes.length === 0) {
-    return (
-      <div className="bg-white rounded-xl border border-dashed border-slate-300 p-10 text-center">
-        <p className="text-slate-500">
-          No recipes yet. Create a recipe to see its cost and profit margin.
-        </p>
-      </div>
-    );
-  }
-
   const normalizedSearch = search.trim().toLowerCase();
   const filteredAndSorted = useMemo(() => {
     const filtered = recipes.filter((recipe) => {
@@ -47,11 +37,23 @@ export function RecipeList({
       if (sortBy === 'name-desc') return b.name.localeCompare(a.name);
       const aTime = Date.parse(a.updatedAt);
       const bTime = Date.parse(b.updatedAt);
-      if (!Number.isFinite(aTime) || !Number.isFinite(bTime)) return 0;
+      if (!Number.isFinite(aTime) || !Number.isFinite(bTime)) {
+        return a.name.localeCompare(b.name);
+      }
       if (sortBy === 'updated-asc') return aTime - bTime;
       return bTime - aTime;
     });
   }, [recipes, normalizedSearch, sortBy]);
+
+  if (recipes.length === 0) {
+    return (
+      <div className="bg-white rounded-xl border border-dashed border-slate-300 p-10 text-center">
+        <p className="text-slate-500">
+          No recipes yet. Create a recipe to see its cost and profit margin.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-4">

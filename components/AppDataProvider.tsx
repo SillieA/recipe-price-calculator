@@ -61,11 +61,18 @@ const mergeByUpdatedAt = <T extends { id: string; updatedAt: string }>(
     }
     const existingTime = Date.parse(existing.updatedAt);
     const incomingTime = Date.parse(item.updatedAt);
-    if (
-      !Number.isFinite(existingTime) ||
-      !Number.isFinite(incomingTime) ||
-      incomingTime >= existingTime
-    ) {
+    const existingValid = Number.isFinite(existingTime);
+    const incomingValid = Number.isFinite(incomingTime);
+
+    if (incomingValid && !existingValid) {
+      merged.set(item.id, item);
+      return;
+    }
+    if (!incomingValid && existingValid) {
+      return;
+    }
+    // Tie-breaker requirement: if timestamps match, prefer incoming shared data.
+    if (incomingTime >= existingTime) {
       merged.set(item.id, item);
     }
   });
@@ -146,13 +153,15 @@ export function AppDataProvider({ children }: { children: ReactNode }) {
             const ingredients = recipe.ingredients.filter(
               (line) => line.ingredientId !== id,
             );
-            return ingredients.length === recipe.ingredients.length
-              ? recipe
-              : {
+            const shouldUpdateRecipe =
+              ingredients.length !== recipe.ingredients.length;
+            return shouldUpdateRecipe
+              ? {
                   ...recipe,
                   ingredients,
                   updatedAt,
-                };
+                }
+              : recipe;
           }),
         };
       });
