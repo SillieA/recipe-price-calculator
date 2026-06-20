@@ -17,6 +17,7 @@ export interface Ingredient {
   unitId: string; // unit (e.g. 'g', 'oz', 'ml')
   updatedAt: string;
   notes?: string;
+  tags?: string[];
 }
 
 export interface RecipeIngredient {
@@ -35,6 +36,7 @@ export interface Recipe {
   isVatRated: boolean; // whether the product is VAT rated (20%)
   updatedAt: string;
   notes?: string;
+  tags?: string[];
 }
 
 export interface AppData {
