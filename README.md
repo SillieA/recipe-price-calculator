@@ -28,14 +28,16 @@ browser (localStorage) — no backend required.
 ## Getting started
 
 ```bash
-npm install
-npm run dev      # http://localhost:3000
+pnpm install
+pnpm dev      # http://localhost:3000
 ```
+
+This project targets Node.js 24 and pnpm 11.8.0.
 
 ## Build (static export)
 
 ```bash
-npm run build
+pnpm build
 ```
 
 The static site is generated into the `out/` directory and can be served by any
